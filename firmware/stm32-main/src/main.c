@@ -1,5 +1,4 @@
 #include "main.h"
-#include "debug.h"
 
 USBD_HandleTypeDef hUSBDDevice;
 
@@ -28,24 +27,12 @@ int main(void)
     BSP_LED_Off(LED6);
     #endif
 
-        debug("Starting USB Demo\n");
 
     USBD_Init(&hUSBDDevice, &HID_Desc,0);
-
-        debug("\tUSB_Init() finished\n");
-
     USBD_RegisterClass(&hUSBDDevice, &USBD_CUSTOM_HID);
-
-        debug("\tUSBD_RegisterClass() finished\n");
-
     /* Add Custom HID callbacks */
     USBD_CUSTOM_HID_RegisterInterface(&hUSBDDevice, &USBD_CustomHID_fops);
-
-        debug("\tUSBD_CUSTOM_HID_RegisterInterface() finished\n");
-
     USBD_Start(&hUSBDDevice);
-
-        debug("USB Demo started\n");
     //USBD_Stop(&hUSBDDevice);
     //USBD_DeInit(&hUSBDDevice);
 
@@ -58,10 +45,12 @@ int main(void)
 
 //User send data to host
 void HAL_SYSTICK_Callback(void){
-    //uint8_t buf[64];
-    //buf[0]=0x0;
-    //buf[1]=0x1;
-    //USBD_CUSTOM_HID_SendReport(&hUSBDDevice,buf,64);
+    uint8_t buf[2];
+    memset (buf,0x0,sizeof(buf));
+    buf[0]=0x1;
+    buf[1]=0x1;
+
+        USBD_CUSTOM_HID_SendReport(&hUSBDDevice,buf,sizeof(buf));
 
 }
 
@@ -127,7 +116,6 @@ static void SystemClock_Config(void){
 
 void Error_Handler(void){
     BSP_LED_On(LED4);
-        debug ("Unrecoverable ERROR occured\n");
     while(1){
         BSP_LED_Toggle(LED4);
         HAL_Delay(100);
