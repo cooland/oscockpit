@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resource xmlns="http://www.wxwidgets.org/wxxrc">
+	<object class="wxDialog" name="CDevice_Radio">
+		<title>Dialog</title>
+		<centered>1</centered>
+		<object class="wxPanel" name="ID_PANEL1">
+			<pos>120,160</pos>
+			<object class="wxFlexGridSizer">
+				<cols>3</cols>
+				<rows>3</rows>
+			</object>
+		</object>
+	</object>
+</resource>
