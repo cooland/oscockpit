@@ -36,7 +36,7 @@
 
 static int8_t CUSTOM_HID_Init     (void);
 static int8_t CUSTOM_HID_DeInit   (void);
-static int8_t CUSTOM_HID_OutEvent (uint8_t event_idx, uint8_t* state, uint16_t size);
+static int8_t CUSTOM_HID_OutEvent (uint8_t* state, uint16_t size);
 
 /* Private variables ---------------------------------------------------------*/
 extern USBD_HandleTypeDef USB_Device;
@@ -118,7 +118,7 @@ static int8_t CUSTOM_HID_DeInit(void)
   * @param  state: event state
   * @retval Result of the operation: USBD_OK if all operations are OK else USBD_FAIL
   */
-static int8_t CUSTOM_HID_OutEvent  (uint8_t event_idx, uint8_t* state, uint16_t size)
+static int8_t CUSTOM_HID_OutEvent  (uint8_t* state, uint16_t size)
 {
     //event_idx=report id   state=recieve bytes ?
 /*
@@ -128,7 +128,7 @@ static int8_t CUSTOM_HID_OutEvent  (uint8_t event_idx, uint8_t* state, uint16_t 
     TextOut(buffer);
 #endif
 */
-    switch (event_idx){
+    switch (state[0]){
     case 1:
             switch (state[1]){ //читаем первый байт в пакете, нулевой байт - номер пакета
                 case 0x0:

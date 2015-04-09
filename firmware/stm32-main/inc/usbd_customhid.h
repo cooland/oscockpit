@@ -55,7 +55,7 @@
 #define CUSTOM_HID_EPOUT_ADDR                0x01
 #define CUSTOM_HID_EPOUT_SIZE                0x40   //max packet size
 
-#define USB_CUSTOM_HID_CONFIG_DESC_SIZ       41
+//#define USB_CUSTOM_HID_CONFIG_DESC_SIZ       41
 #define USB_CUSTOM_HID_DESC_SIZ              9
 
 #define CUSTOM_HID_DESCRIPTOR_TYPE           0x21
@@ -90,7 +90,7 @@ typedef struct _USBD_CUSTOM_HID_Itf
   uint8_t                  *pReport;
   int8_t (* Init)          (void);
   int8_t (* DeInit)        (void);
-  int8_t (* OutEvent)      (uint8_t, uint8_t*, uint16_t );
+  int8_t (* OutEvent)      (uint8_t*, uint16_t );
 
 }USBD_CUSTOM_HID_ItfTypeDef;
 
