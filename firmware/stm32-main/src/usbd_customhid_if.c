@@ -134,42 +134,7 @@ static int8_t CUSTOM_HID_DeInit(void)
   */
 static int8_t CUSTOM_HID_OutEvent  (uint8_t* state, uint16_t size)
 {
-    ReadUSBData(state,size);
-    //event_idx=report id   state=recieve bytes ?
-/*
-#ifdef _DEBUG
-    char buffer[255];
-    sprintf(buffer,"%d %d %d\n", event_idx, state[1], size);
-    TextOut(buffer);
-#endif
-*/
-/*
-    switch (state[0]){
-    case 1:
-            switch (state[1]){ //читаем первый байт в пакете, нулевой байт - номер пакета
-                case 0x0:
-                    BSP_LED_Toggle(LED3);
-                    break;
-                case 0x1:
-                    BSP_LED_Toggle(LED5);
-                    break;
-                case 0x2:
-                    BSP_LED_Toggle(LED6);
-                    break;
-                case 0x3:
-                    BSP_LED_Toggle(LED4);
-                    break;
-
-                default:
-                    break;
-            }
-        break;
-
-    default:
-        //BSP_LED_Toggle(LED6);
-    break;
-    }
-*/
+    ReadUSBData(state,size);    //in main.c
 
   return USBD_OK;
 }
