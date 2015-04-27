@@ -42,16 +42,56 @@ int main(void)
   }
 }
 
+//User read data from host
+void ReadUSBData (uint8_t* state, uint16_t size){
+    switch (state[0]){
+    case 1:
+            switch (state[1]){ //читаем первый байт в пакете, нулевой байт - номер пакета
+                case 0x0:
+                    BSP_LED_Toggle(LED3);
+                    uint8_t buf[64];
+                    memset(buf,0x0,sizeof(buf));
+                    buf[0]=0x1;
+                    buf[8]=0xFF;
+                    //SendUSBData(buf,sizeof(buf));
+                    USBD_CUSTOM_HID_SendReport(&hUSBDDevice,buf,sizeof(buf));
+                    break;
+                case 0x1:
+                    BSP_LED_Toggle(LED5);
+                    break;
+                case 0x2:
+                    BSP_LED_Toggle(LED6);
+                    break;
+                case 0x3:
+                    BSP_LED_Toggle(LED4);
+                    break;
+
+                default:
+                    break;
+            }
+        break;
+
+    default:
+        //BSP_LED_Toggle(LED6);
+    break;
+    }
+
+}
+
+void SendUSBData(uint8_t* state, uint16_t size){
+    USBD_CUSTOM_HID_SendReport(&hUSBDDevice,state,size);
+}
 
 //User send data to host
 void HAL_SYSTICK_Callback(void){
-    uint8_t buf[2];
+    /*uint8_t buf[63];
     memset (buf,0x0,sizeof(buf));
-    buf[0]=0x1;
-    buf[1]=0x1;
-
+    int i;
+    for (i=0;i<sizeof(buf);i++){
+        buf[i]=i;
+    }
         USBD_CUSTOM_HID_SendReport(&hUSBDDevice,buf,sizeof(buf));
-
+    */
 }
 
 /**

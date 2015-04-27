@@ -178,16 +178,16 @@ __ALIGN_BEGIN static uint8_t USBD_CUSTOM_HID_CfgDesc[USB_CUSTOM_HID_CONFIG_DESC_
   0x05,                                     /*bDescriptorType: Endpoint*/
   CUSTOM_HID_EPIN_ADDR,                     /*bEndpointAddress: Endpoint Address (IN)*/
   0x03,                                     /*bmAttributes: Interrupt endpoint*/
-  CUSTOM_HID_EPIN_SIZE, 0x00,               /*wMaxPacketSize: 64 Byte max */
-  0x20,                                     /*bInterval: Polling Interval (20 ms)*/
+  CUSTOM_HID_EPIN_SIZE, 0x00,               /*wMaxPacketSize: 63 Byte max */
+  0x10,                                     /*bInterval: Polling Interval (10 ms)*/
   /* 34 */
 
   0x07,	                                    /* bLength: Endpoint Descriptor size */
   0x05,	                                    /* bDescriptorType: Endpoint */
   CUSTOM_HID_EPOUT_ADDR,                    /*bEndpointAddress: Endpoint Address (OUT)*/
   0x03,	                                    /* bmAttributes: Interrupt endpoint */
-  CUSTOM_HID_EPOUT_SIZE, 0x00,              /* wMaxPacketSize: 64 Bytes max  */
-  0x20,	                                    /* bInterval: Polling Interval (20 ms) */
+  CUSTOM_HID_EPOUT_SIZE, 0x00,              /* wMaxPacketSize: 63 Bytes max  */
+  0x10,	                                    /* bInterval: Polling Interval (10 ms) */
   /* 41 */
 } ;
 

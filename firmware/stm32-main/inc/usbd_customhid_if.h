@@ -42,6 +42,7 @@
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 extern USBD_CUSTOM_HID_ItfTypeDef USBD_CustomHID_fops;
+extern void ReadUSBData (uint8_t* state, uint16_t size);
 
 #ifdef __cplusplus
 }

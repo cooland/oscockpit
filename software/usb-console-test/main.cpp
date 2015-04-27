@@ -11,14 +11,16 @@
 #define MAX_STR 255
 //VID and PID for custom devices discrimination by serial number
 //https://github.com/obdev/v-usb/blob/master/usbdrv/USB-IDs-for-free.txt
+//#define VID 0x0477
 #define VID 0x27d9
+//#define PID 0x5620
 #define PID 0x16c0
 
 
 int main(int argc, char* argv[])
 {
     int res;
-    unsigned char buf[2];
+    unsigned char buf[63];
     wchar_t wstr[MAX_STR];
     hid_device *handle;
     int i;
@@ -56,6 +58,7 @@ int main(int argc, char* argv[])
     ////handle = hid_open(0x4d8, 0x3f, L"12345");
     //online guid gen https://www.guidgenerator.com/online-guid-generator.aspx
     handle=hid_open(VID,PID,L"9088a05a-bc89-4c60-9c2a-4d80e86a385d");
+    //handle=hid_open(VID,PID,NULL);
     if (!handle){
         printf("Unable to open device");
         return 1;
@@ -84,9 +87,71 @@ int main(int argc, char* argv[])
         //set the hid_read function to non-blocking
         hid_set_nonblocking(handle, true);
 
+        //try to read from device
+        /*while(1){
+            res=hid_read(handle,buf,sizeof(buf));
+
+                //print the returned buffer
+                if (res>0){
+                    printf("Data read:\n");
+                    for (int j=0;j<res;j++){
+                        printf("%02hx ",buf[j]);
+                    }
+                    printf("\n");
+                }
+                else{
+                    if (res==0){
+                        printf("Error data read: null data given\n");
+                    }else{
+                    printf("Error data read: %ls \n", hid_error(handle));
+                    }
+                }
+        }*/
+
+        //try to write to device
+        unsigned char tmp_buf[64];
+        memset(tmp_buf,0x0,sizeof(tmp_buf));
+        while(1){
+                tmp_buf[0]=0x1;
+                tmp_buf[1]=0x0;
+                res=hid_write(handle,tmp_buf,sizeof(tmp_buf));
+
+                if (res<0){
+                    //printf("Unable to write()\n");
+                    printf("Error: %ls", hid_error(handle));
+                    printf("\n");
+                }
+                else{
+                    printf("write() OK\n");
+                }
+
+
+
+                res=hid_read(handle,buf,sizeof(buf));
+
+                //print the returned buffer
+                if (res>0){
+                    printf("Data read:\n");
+                    for (int j=0;j<res;j++){
+                        printf("%02hx ",buf[j]);
+                    }
+                    printf("\n");
+                }
+                else{
+                    if (res==0){
+                        printf("Error data read: null data given\n");
+                    }else{
+                    printf("Error data read: %ls \n", hid_error(handle));
+                    }
+                }
+
+                Sleep(500);
+        }
+
+
         int delay=500;
         memset (buf,0x0,sizeof(buf)); //заполняем buf 0
-        unsigned char buf1[2];
+        unsigned char buf1[63];
         memset (buf1,0x0,sizeof(buf1));
         int res1=0;
 
