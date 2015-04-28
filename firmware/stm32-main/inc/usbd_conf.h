@@ -61,7 +61,7 @@
 #define USBD_DEBUG_LEVEL                      0
 
 #define USBD_CUSTOMHID_OUTREPORT_BUF_SIZE     0x40      // 64 bytes
-#define USBD_CUSTOM_HID_REPORT_DESC_SIZE      27        /*report size from usbd_customhid_if.c*/
+#define USBD_CUSTOM_HID_REPORT_DESC_SIZE      29        /*report size from usbd_customhid_if.c*/
 
 /* MSC Class Config */
 //#define MSC_MEDIA_PACKET                       8192

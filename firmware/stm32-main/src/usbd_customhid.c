@@ -160,7 +160,7 @@ __ALIGN_BEGIN static uint8_t USBD_CUSTOM_HID_CfgDesc[USB_CUSTOM_HID_CONFIG_DESC_
   0x00,                                     /*bInterfaceProtocol : 0=none, 1=keyboard, 2=mouse*/
   0,                                        /*iInterface: Index of string descriptor*/
   /* 18 */
-  /******************** Descriptor of CUSTOM_HID ??? *************************/
+  /*************************** HID descriptor ********************************/
 
   0x09,                                     /*bLength: CUSTOM_HID Descriptor size*/
   CUSTOM_HID_DESCRIPTOR_TYPE,               /*bDescriptorType: CUSTOM_HID*/
