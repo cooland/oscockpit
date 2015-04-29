@@ -113,12 +113,12 @@ int main(int argc, char* argv[])
         memset(tmp_buf,0x0,sizeof(tmp_buf));
         while(1){
                 tmp_buf[0]=0x1;
-                tmp_buf[1]=0x0;
+                tmp_buf[63]=0x10;
                 res=hid_write(handle,tmp_buf,sizeof(tmp_buf));
 
                 if (res<0){
                     //printf("Unable to write()\n");
-                    printf("Error: %ls", hid_error(handle));
+                    printf("Error write: %ls", hid_error(handle));
                     printf("\n");
                 }
                 else{
