@@ -61,19 +61,21 @@ __ALIGN_BEGIN static uint8_t CUSTOM_HID_ReportDesc[USBD_CUSTOM_HID_REPORT_DESC_S
  */
 
     0x06, 0x00, 0xff, 	// USAGE_PAGE (Vendor defined)
-    0x09, 0x01, 		// USAGE (Vendor Usage 1)
+    0x09, 0x00, 		// USAGE (Vendor Usage 0)
     0xa1, 0x01, 		// COLLECTION (Application)
     0x09, 0x01, 		// USAGE(Vendor Usage 1)
-	0x15, 0x00, 		// LOGICAL_MINIMUM (0)
-    0x26, 0xff, 0x00,	// LOGICAL_MAXIMUM (255)
+	//0x15, 0x00, 		// LOGICAL_MINIMUM (0)
+    //0x26, 0xff, 0x00,	// LOGICAL_MAXIMUM (255)
     0x95, 0x3f, 		// REPORT_COUNT (63) 63 bytes
     0x75, 0x08, 		// REPORT_SIZE (8) 8 bits
+    0x85, 0x01,			// REPORT_ID (1)
     0x91, 0x82, 		// OUTPUT (Data,Var,Abs,Vol)
+    0x09, 0x01, 		// USAGE(Vendor Usage 1)
     0x81, 0x82, 		// INPUT (Data,Var,Abs,Vol)
     0xc0        // END_COLLECTION
-    //23
-	
-	
+    //22
+
+
 };
 //change USBD_CUSTOM_HID_REPORT_DESC_SIZE in usbd_conf.h too
 

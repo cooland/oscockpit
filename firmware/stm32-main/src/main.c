@@ -4,6 +4,8 @@ USBD_HandleTypeDef hUSBDDevice;
 
 static void SystemClock_Config(void);
 
+uint8_t out_buf[64];
+
 int main(void)
 {
     HAL_Init();
@@ -46,15 +48,18 @@ int main(void)
 void ReadUSBData (uint8_t* state, uint16_t size){
     switch (state[0]){
     case 1:
-            switch (state[1]){ //читаем первый байт в пакете, нулевой байт - номер пакета
-                case 0x0:
+            switch (state[63]){ //читаем последний байт в пакете, нулевой байт - номер пакета
+                case 0x10:
                     BSP_LED_Toggle(LED3);
-                    uint8_t buf[64];
-                    memset(buf,0x0,sizeof(buf));
-                    buf[0]=0x1;
-                    buf[8]=0xFF;
+
+                    memset(out_buf,0x0,sizeof(out_buf));
+                    out_buf[0]=0x1;//REPORT_ID
+                    int i;
+                    for (i=1;i<sizeof(out_buf);i++){
+                        out_buf[i]=i;
+                    }
                     //SendUSBData(buf,sizeof(buf));
-                    USBD_CUSTOM_HID_SendReport(&hUSBDDevice,buf,sizeof(buf));
+                    USBD_CUSTOM_HID_SendReport(&hUSBDDevice,out_buf,sizeof(out_buf));
                     break;
                 case 0x1:
                     BSP_LED_Toggle(LED5);
